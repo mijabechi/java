@@ -1,4 +1,4 @@
-package KeyGen;
+package PwdGen;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;

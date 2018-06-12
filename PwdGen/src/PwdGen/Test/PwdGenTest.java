@@ -1,4 +1,4 @@
-package KeyGen.Test;
+package PwdGen.Test;
 
 import static org.junit.Assert.*;
 
