@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import KeyGen.PwdGen;
+import PwdGen.PwdGen;
+
 
 public class PwdGenTest {
 
