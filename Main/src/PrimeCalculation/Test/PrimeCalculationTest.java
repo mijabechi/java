@@ -97,15 +97,15 @@ public class PrimeCalculationTest {
 	 *
 	 */
 	@Test
-	public void test04ShouldGetQuantityOfPrimesNumbersUsingFor() {
+	public void test04ShouldGetQuantityOfPrimeNumbersUsingFor() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
-		int count = calculation.getQuantityOfPrimesForOption(numberToEvaluate);
+		List<Integer> numbers = calculation.getQuantityOfPrimesForOption(numberToEvaluate);
 		long afterTime = System.nanoTime();
 		System.out.println("Use Option 1 FOR");
-		System.out.println("Count primes numbers Between 1 to 1000000: "+count+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		System.out.println("Count prime numbers Between 1 to 1000000: "+numbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
 		
-		assertTrue(78498 == count);
+		assertTrue(78498 == numbers.size());
 	}
 	
 	/*
@@ -123,12 +123,12 @@ public class PrimeCalculationTest {
 	public void test05ShouldGetQuantityOfPrimesNumbersUsingRecursive() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
-		int count = calculation.getQuantityOfPrimesForRecursive(numberToEvaluate);
+		List<Integer> numbers = calculation.getQuantityOfPrimesForRecursive(numberToEvaluate);
 		long afterTime = System.nanoTime();
 		System.out.println("Use Option 2 Recursive");
-		System.out.println("Count primes numbers Between 1 to 1000000: "+count+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		System.out.println("Count prime numbers Between 1 to 1000000: "+numbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
 		
-		assertTrue(78498 == count);
+		assertTrue(78498 == numbers.size());
 	}
 	
 	/*
@@ -144,11 +144,80 @@ public class PrimeCalculationTest {
 	public void test06ShouldGetQuantityOfPrimesCustomOption() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
-		int count = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
+		List<Integer> numbers = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
 		long afterTime = System.nanoTime();
 		System.out.println("Use Option 3 Custom");
-		System.out.println("Count primes numbers Between 1 to 1000000: "+count+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		System.out.println("Count prime numbers Between 1 to 1000000: "+numbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
 		
-		assertTrue(78498 == count);
+		assertTrue(78498 == numbers.size());
 	}
+	
+	/*
+	 * Test 1 = 71375032369
+	 * Test 2 = 72167685094
+	 * Test 3 = 70917268477
+	 * Prom   = 71486661980 nanoseconds => 71.48666198 seconds 
+	 *
+	 */
+	@Test
+	public void test07ShouldGetQuantityOfCircularPrimesNumbersUsingFor() {
+		PrimeCalculation calculation = new PrimeCalculation();
+		long beforetime = System.nanoTime();
+		List<Integer> numbers = calculation.getQuantityOfPrimesForOption(numberToEvaluate);
+		List<Integer> circularPrimeNumbers = calculation.evaluateCircularPrimeNumbers(numbers);
+		long afterTime = System.nanoTime();
+		System.out.println("Use Option 1 FOR");
+		System.out.println("Circular prime numbers: "+circularPrimeNumbers);
+		System.out.println("Count circular prime numbers Between 1 to 1000000: "+circularPrimeNumbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		
+		assertTrue(78498 == numbers.size());
+	}
+	
+	/*
+	 * This solution must enable the Xss10m in the JVM to avoid the StackOverflow
+	 * 
+	 * Test 1 = 117361302618
+	 * Test 2 = 116909162372
+	 * Test 3 = 119533258384
+	 * Prom   = 117934574458 nanoseconds => 117.934574458 seconds
+	 *
+	 */
+	@Test
+	public void test08ShouldGetQuantityOfCircularPrimesNumbersUsingRecursive() {
+		PrimeCalculation calculation = new PrimeCalculation();
+		long beforetime = System.nanoTime();
+		List<Integer> numbers = calculation.getQuantityOfPrimesForRecursive(numberToEvaluate);
+		List<Integer> circularPrimeNumbers = calculation.evaluateCircularPrimeNumbers(numbers);
+		long afterTime = System.nanoTime();
+		System.out.println("Use Option 2 Recursive");
+		System.out.println("Circular prime numbers: "+circularPrimeNumbers);
+		System.out.println("Count circular prime numbers Between 1 to 1000000: "+circularPrimeNumbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		
+		assertTrue(78498 == numbers.size());
+	}
+	
+	/*
+	 * This is the best option to evaluate circular prime numbers
+	 * 
+	 * Test 1 = 8071289701
+	 * Test 2 = 8139653506
+	 * Test 3 = 8183885869
+	 * Prom   = 8131609692 nanoseconds => 8.131609692 seconds
+	 *
+	 */
+	@Test
+	public void test09ShouldGetQuantityOfCircularPrimesCustomOption() {
+		PrimeCalculation calculation = new PrimeCalculation();
+		long beforetime = System.nanoTime();
+		List<Integer> numbers = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
+		List<Integer> circularPrimeNumbers = calculation.evaluateCircularPrimeNumbers(numbers);
+		long afterTime = System.nanoTime();
+		System.out.println("Use Option 3 Custom");
+		System.out.println("Circular prime numbers: "+circularPrimeNumbers);
+		System.out.println("Count circular prime numbers Between 1 to 1000000: "+circularPrimeNumbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+		
+		assertTrue(78498 == numbers.size());
+	}
+	
+	
 }

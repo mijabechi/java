@@ -14,7 +14,7 @@ public class PrimeCalculation {
 	 * This method always return true, when a number is prime.
 	 * This solution use "for" to evaluate the behavior.
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this solution is 2375 % slower than the custom option 
@@ -37,7 +37,7 @@ public class PrimeCalculation {
 	 * This method always return true, when a number is prime.
 	 * This solution use "recursive function" to evaluate the behavior.
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this solution is 9241 %  slower than the custom option 
@@ -75,7 +75,7 @@ public class PrimeCalculation {
 	 * if the validations are different of number % list = 0 then it is a prime number.
 	 * 
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this is the best implementation
@@ -157,10 +157,10 @@ public class PrimeCalculation {
 	}
 	
 	/**
-	 * This method get the quantity of primes numbers between 1 to 1000000.
+	 * This method get the quantity of prime numbers between 1 to 1000000.
 	 * This solution use "for" to evaluate the behavior.
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this solution is  5837 %  slower than the custom option 
@@ -169,23 +169,21 @@ public class PrimeCalculation {
 	 * @param  limit number of limit to be evaluate
 	 * @return  quantity of numbers between 1 to 1000000.
 	 */
-	public int getQuantityOfPrimesForOption(int limit) {
-		int result = 0;
-		List<Integer> numbers = new ArrayList<>();
+	public List<Integer> getQuantityOfPrimesForOption(int limit) {
+		List<Integer> primesNumbers = new ArrayList<>();
 		for (int i = 2; i <= limit; i++) {
 			if(isPrimeNumberOptionFor(i)) {
-				result++;
-				numbers.add(i);
+				primesNumbers.add(i);
 			}
 		}
-		return result;
+		return primesNumbers;
 	}
 
 	/**
-	 * This method get the quantity of primes numbers between 1 to 1000000.
+	 * This method get the quantity of prime numbers between 1 to 1000000.
 	 * This solution use "recursive function" to evaluate the behavior.
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this solution is  9674 % slower than the custom option 
@@ -194,33 +192,31 @@ public class PrimeCalculation {
 	 * @param  limit number of limit to be evaluate
 	 * @return  quantity of numbers between 1 to 1000000.
 	 */
-	public int getQuantityOfPrimesForRecursive(int valueToEvaluate) {
-		int result = 0;
-		List<Integer> numbers = new ArrayList<>();
+	public List<Integer> getQuantityOfPrimesForRecursive(int valueToEvaluate) {
+		List<Integer> primesNumbers = new ArrayList<>();
 		for (int i = 2; i <= valueToEvaluate; i++) {
 			if(isPrimeNumberOptionRecursive(i)) {
-				result++;
-				numbers.add(i);
+				primesNumbers.add(i);
 			}
 		}
-		return result;
+		return primesNumbers;
 	}
 	
 	/**
-	 * This method get the quantity of primes numbers between 1 to 1000000.
+	 * This method get the quantity of prime numbers between 1 to 1000000.
 	 * This solution use "custom implementation that use combinations of for 
 	 * and a math formula" to evaluate the behavior.
 	 * 
 	 * The math formula consist in:
 	 * 
 	 * 1. use the squareRoot to avoid evaluate big numbers
-	 * 2. after is necessary identify a list of primes numbers 
+	 * 2. after is necessary identify a list of prime numbers 
 	 * between 1 to the next prime number of the result of squareRoot
 	 * 3. evaluate the number module every number of the list of prime numbers
 	 * if the validations are different of number % list = 0 then it is a prime number.
 	 * 
 	 * It has an improvement to avoid evaluate the entire number, for example: number = 11
-	 * when it is evaluating if the numbers is prime it just use the middle of the number
+	 * when it is evaluating if the number is prime it just use the middle of the number
 	 * to be evaluate => 11%2,11%3,11%5,11%7 if it don't have occurrences then it is a prime number.
 	 * 
 	 * this is the best implementation
@@ -233,18 +229,86 @@ public class PrimeCalculation {
 	 * @param  limit number of limit to be evaluate
 	 * @return  quantity of numbers between 1 to 1000000.
 	 */
-	public int getQuantityOfPrimesCustomOption(int numberToEvaluate) {
+	public List<Integer> getQuantityOfPrimesCustomOption(int numberToEvaluate) {
 		
-		int result = 0;
+		List<Integer> primesNumbers = new ArrayList<>();
 		double squareRoot = (Math.sqrt(numberToEvaluate));
 		int trimSquareRoot = (int) squareRoot;
 		int limit = getNextPrimeNumber(trimSquareRoot);
 		List<Integer> primes = getPrimes(limit,(int) limit);
 		for (int i = 2; i <= numberToEvaluate; i++) {
 			if(isPrimeNumberOptionCustom(i,primes)) {
-				result++;
+				primesNumbers.add(i);
 			}
 		}
-		return result;
+		return primesNumbers;
 	}
+	
+	public List<Integer> evaluateCircularPrimeNumbers(List<Integer> numbers) {
+		List<Integer> circularNumbers = new java.util.ArrayList<>();
+		int specialCase = 11;
+		for (int i = 0; i < numbers.size(); i++) {
+				List<Integer> temporalCircularNumbers = new java.util.ArrayList<>();
+				Integer number = numbers.get(i);
+				evaluateCircularPrimeNumber(numbers, circularNumbers, number, temporalCircularNumbers, number);
+				if(temporalCircularNumbers.size() == getLength(number) || number == specialCase) {
+					circularNumbers.addAll(temporalCircularNumbers);
+				}
+			}
+		return circularNumbers;
+	}
+
+	private void evaluateCircularPrimeNumber(List<Integer> numbers, List<Integer> circularNumbers, int numberBase, List<Integer> temporalCircularNumbers, Integer number) {
+		
+		int pow = (int) Math.pow(10, getLength(numberBase)-1);
+		int calculatePow = (number % pow)*10;
+		int numberDiv = number / pow;
+		int nextValue = calculatePow + numberDiv;
+		if(numbers.contains(nextValue) && !circularNumbers.contains(number) && !temporalCircularNumbers.contains(number)) {
+			temporalCircularNumbers.add(number);
+		    evaluateCircularPrimeNumber(numbers, circularNumbers, numberBase, temporalCircularNumbers, nextValue);
+		}
+	}
+	
+	private int getLength(int number) {
+		
+		if (number < 100000) {
+		    if (number < 100) {
+		        if (number < 10) {
+		            return 1;
+		        } else {
+		            return 2;
+		        }
+		    } else {
+		        if (number < 1000) {
+		            return 3;
+		        } else {
+		            if (number < 10000) {
+		                return 4;
+		            } else {
+		                return 5;
+		            }
+		        }
+		    }
+		} else {
+		    if (number < 10000000) {
+		        if (number < 1000000) {
+		            return 6;
+		        } else {
+		            return 7;
+		        }
+		    } else {
+		        if (number < 100000000) {
+		            return 8;
+		        } else {
+		            if (number < 1000000000) {
+		                return 9;
+		            } else {
+		                return 10;
+		            }
+		        }
+		    }
+		}
+	}
+
 }
