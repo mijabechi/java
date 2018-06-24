@@ -1,13 +1,15 @@
 package PrimeCalculation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class PrimeCalculation {
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 	}
 	
 	/**
@@ -103,6 +105,8 @@ public class PrimeCalculation {
 			int trimSquareRoot = (int)squareRoot;
 			long limit = getNextPrimeNumber(trimSquareRoot);
 			istrue = isPrimeCustomValidation(primes,value, limit);
+		}else {
+			//System.out.println(value);
 		}
 		return istrue;
 	}
@@ -121,12 +125,18 @@ public class PrimeCalculation {
 	private boolean isPrimeShortValidationImprovement(long refere) {
 		int max = (int) (refere > 12 ? 11: refere -1);
 		boolean result = true;
+		for (int i = max; i >= 2;i--) {
+			if(refere % i == 0) {
+				result = false;
+				break;
+			}
+		}/*
 		for (int i = 2; i < max;i++) {
 			if(refere % i == 0) {
 				result = false;
 				break;
 			}
-		}
+		}*/
 		return result;
 	}
 
@@ -229,21 +239,75 @@ public class PrimeCalculation {
 	 * @param  limit number of limit to be evaluate
 	 * @return  quantity of numbers between 1 to 1000000.
 	 */
-	public List<Integer> getQuantityOfPrimesCustomOption(int numberToEvaluate) {
-		
-		List<Integer> primesNumbers = new ArrayList<>();
+	public HashMap getQuantityOfPrimesCustomOption(int numberToEvaluate) {
+		HashMap primesNumbers = new HashMap<>();
 		double squareRoot = (Math.sqrt(numberToEvaluate));
 		int trimSquareRoot = (int) squareRoot;
 		int limit = getNextPrimeNumber(trimSquareRoot);
 		List<Integer> primes = getPrimes(limit,(int) limit);
-		for (int i = 2; i <= numberToEvaluate; i++) {
+		HashMap circularNumbers = new HashMap<>();
+		int increment = 0;
+		for (int i = numberToEvaluate; i >= 2 ; i--) {
+			HashMap temporalCircularNumbers = new HashMap<>();
 			if(isPrimeNumberOptionCustom(i,primes)) {
-				primesNumbers.add(i);
-			}
+				primesNumbers.put(i, 0);
+				}
 		}
 		return primesNumbers;
 	}
-	
+
+
+
+
+	public HashMap evaluateCircularPrimeNumbers(int numberToEvaluate) {
+		HashMap result = new HashMap<>(); 
+		//List<Integer> returnr = new ArrayList<>();
+		HashMap primesNumbers = new HashMap<>();
+		double squareRoot = (Math.sqrt(numberToEvaluate));
+		int trimSquareRoot = (int) squareRoot;
+		int limit = getNextPrimeNumber(trimSquareRoot);
+		List<Integer> primes = getPrimes(limit,(int) limit);
+		HashMap circularNumbers = new HashMap<>();
+		for (int i = numberToEvaluate; i >= 2 ; i--) {
+			int lenghtBaseNumber = getLength(i);
+			HashMap temporalCircularNumbers = new HashMap<>();
+			if(isPrimeNumberOptionCustom(i,primes)) {
+				int pow = (int) Math.pow(10, lenghtBaseNumber-1);
+				int calculatePow = (i % pow)*10;
+				int numberDiv = i / pow;
+				primesNumbers.put(i, 0);
+				int nextValue = calculatePow + numberDiv;
+				temporalCircularNumbers.put(nextValue,0);
+				if(primesNumbers.containsKey(nextValue)) {
+					if(lenghtBaseNumber == 1)
+					{
+						circularNumbers.put(nextValue, 0);
+					}
+					for (int j = 1; j < lenghtBaseNumber; j++) {
+						
+						calculatePow = (nextValue % pow)*10;
+						numberDiv = nextValue / pow;
+						nextValue = calculatePow + numberDiv;
+						temporalCircularNumbers.put(nextValue,0);
+						if(lenghtBaseNumber != getLength(nextValue) || nextValue > numberToEvaluate)
+							break;
+						boolean iiValid = primesNumbers.containsKey(nextValue);
+						if(iiValid) {
+							if(j == lenghtBaseNumber-1)
+								circularNumbers.putAll(temporalCircularNumbers);
+						}else {
+							break;
+						}
+					}
+					
+				}
+			}
+		}
+		result.put(0, primesNumbers);
+		result.put(1, circularNumbers);
+		return result;
+	}
+
 	public List<Integer> evaluateCircularPrimeNumbers(List<Integer> numbers) {
 		List<Integer> circularNumbers = new java.util.ArrayList<>();
 		int specialCase = 11;

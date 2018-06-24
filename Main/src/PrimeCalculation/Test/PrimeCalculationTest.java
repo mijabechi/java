@@ -2,7 +2,12 @@ package PrimeCalculation.Test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -23,13 +28,19 @@ public class PrimeCalculationTest {
 	private int numberToEvaluate = 1000000;
 	private int primeNumber = 524287;
 	
+	@Test
+	public void test00PrintLn() {
+		System.out.println("*********************** IsPrime  ***********************");
+		System.out.println("");
+	}
+	
 	/*
 	 * Test 1 = 4007888
 	 * Test 2 = 2752418
 	 * Test 3 = 3978058
 	 * Test 4 = 3383154
 	 * Test 5 = 3219863
-	 * Prom   = 3468276,2 nanoseconds => 0.034682762 seconds
+	 * Prom   = 3468276 nanoseconds => 0.0034682762 seconds
 	 *
 	 */
 	@Test
@@ -49,9 +60,7 @@ public class PrimeCalculationTest {
 	 * Test 1 = 10002934
 	 * Test 2 = 27374986
 	 * Test 3 = 18513397
-	 * Test 4 = 9982019
-	 * Test 5 = 1601040
-	 * Prom   = 13494875,2 nanoseconds => 0.134948752 seconds
+	 * Prom   = 18630439 nanoseconds => 0.018630439 seconds
 	 *
 	 */
 	@Test
@@ -67,12 +76,10 @@ public class PrimeCalculationTest {
 	}
 	
 	/*
-	 * Test 1 = 1151512
-	 * Test 2 = 1009543
-	 * Test 3 = 1003870
-	 * Test 4 = 2565375
-	 * Test 5 = 1571020
-	 * Prom   = 1460264 nanoseconds => 0.001460264 seconds 
+	 * Test 1 = 864401
+	 * Test 2 = 674997
+	 * Test 3 = 786780
+	 * Prom   = 775392 nanoseconds => 0.000775392 seconds 
 	 *
 	 */
 	@Test
@@ -87,6 +94,13 @@ public class PrimeCalculationTest {
 		assertTrue(isPrime);
 	}
 	
+	@Test
+	public void test04PrintLn1() {
+		System.out.println("");
+		System.out.println("***************** Count prime numbers  *****************");
+		System.out.println("");
+	}
+	
 	/*
 	 * Test 1 = 63669442300
 	 * Test 2 = 63385793103
@@ -97,7 +111,7 @@ public class PrimeCalculationTest {
 	 *
 	 */
 	@Test
-	public void test04ShouldGetQuantityOfPrimeNumbersUsingFor() {
+	public void test05ShouldGetQuantityOfPrimeNumbersUsingFor() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
 		List<Integer> numbers = calculation.getQuantityOfPrimesForOption(numberToEvaluate);
@@ -120,7 +134,7 @@ public class PrimeCalculationTest {
 	 *
 	 */
 	@Test
-	public void test05ShouldGetQuantityOfPrimesNumbersUsingRecursive() {
+	public void test06ShouldGetQuantityOfPrimesNumbersUsingRecursive() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
 		List<Integer> numbers = calculation.getQuantityOfPrimesForRecursive(numberToEvaluate);
@@ -132,24 +146,29 @@ public class PrimeCalculationTest {
 	}
 	
 	/*
-	 * Test 1 = 1129113671
-	 * Test 2 = 1156167287
-	 * Test 3 = 1089770358
-	 * Test 4 = 1176809628
-	 * Test 5 = 1109759161
-	 * Prom   = 1132324021 nanoseconds => 1.132324021 seconds
+	 * Test 1 = 500432459
+	 * Test 2 = 475120853
+	 * Test 3 = 475928746
+	 * Prom   = 483827352 nanoseconds => 0.483827352 seconds
 	 *
 	 */
 	@Test
-	public void test06ShouldGetQuantityOfPrimesCustomOption() {
+	public void test07ShouldGetQuantityOfPrimesCustomOption() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
-		List<Integer> numbers = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
+		HashMap numbers = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
 		long afterTime = System.nanoTime();
 		System.out.println("Use Option 3 Custom");
 		System.out.println("Count prime numbers Between 1 to 1000000: "+numbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
 		
 		assertTrue(78498 == numbers.size());
+	}
+	
+	@Test
+	public void test08PrintLn2() {
+		System.out.println("");
+		System.out.println("************ Count circular prime numbers  *************");
+		System.out.println("");
 	}
 	
 	/*
@@ -160,7 +179,7 @@ public class PrimeCalculationTest {
 	 *
 	 */
 	@Test
-	public void test07ShouldGetQuantityOfCircularPrimesNumbersUsingFor() {
+	public void test09ShouldGetQuantityOfCircularPrimesNumbersUsingFor() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
 		List<Integer> numbers = calculation.getQuantityOfPrimesForOption(numberToEvaluate);
@@ -183,7 +202,7 @@ public class PrimeCalculationTest {
 	 *
 	 */
 	@Test
-	public void test08ShouldGetQuantityOfCircularPrimesNumbersUsingRecursive() {
+	public void test10ShouldGetQuantityOfCircularPrimesNumbersUsingRecursive() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
 		List<Integer> numbers = calculation.getQuantityOfPrimesForRecursive(numberToEvaluate);
@@ -199,25 +218,23 @@ public class PrimeCalculationTest {
 	/*
 	 * This is the best option to evaluate circular prime numbers
 	 * 
-	 * Test 1 = 8071289701
-	 * Test 2 = 8139653506
-	 * Test 3 = 8183885869
-	 * Prom   = 8131609692 nanoseconds => 8.131609692 seconds
+	 * Test 1 = 630982238
+	 * Test 2 = 641587946
+	 * Test 3 = 668850330
+	 * Prom   = 647140171 nanoseconds => 0.647140171 seconds
 	 *
 	 */
 	@Test
-	public void test09ShouldGetQuantityOfCircularPrimesCustomOption() {
+	public void test11ShouldGetQuantityOfCircularPrimesCustomOption() {
 		PrimeCalculation calculation = new PrimeCalculation();
 		long beforetime = System.nanoTime();
-		List<Integer> numbers = calculation.getQuantityOfPrimesCustomOption(numberToEvaluate);
-		List<Integer> circularPrimeNumbers = calculation.evaluateCircularPrimeNumbers(numbers);
+		HashMap numbers = calculation.evaluateCircularPrimeNumbers(numberToEvaluate);
 		long afterTime = System.nanoTime();
+	    SortedSet<String> keys = new TreeSet<String>(((HashMap) numbers.get(1)).keySet());
 		System.out.println("Use Option 3 Custom");
-		System.out.println("Circular prime numbers: "+circularPrimeNumbers);
-		System.out.println("Count circular prime numbers Between 1 to 1000000: "+circularPrimeNumbers.size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
-		
-		assertTrue(78498 == numbers.size());
+		System.out.println("Circular prime numbers: "+keys);
+		System.out.println("Count circular prime numbers Between 1 to 1000000: "+((HashMap) numbers.get(1)).size()+" Elapsed Time: "+(afterTime - beforetime) + " Nanoseconds");
+
+		assertTrue(78498 == ((HashMap) numbers.get(0)).size());
 	}
-	
-	
 }
